@@ -7,12 +7,14 @@ import {
   createTodo,
   updateTodo,
   deleteTodo,
+  getoneTodo,
 } from "../controller/todo.js";
 
 const todoRouter = Router();
 
 todoRouter.get("/gettodo", getTodo);
-todoRouter.post("/createtodo", createTodo);
-todoRouter.patch("/updatetodo", updateTodo);
-todoRouter.delete("/deletetodo", deleteTodo);
+todoRouter.get("/:id/getonetodo", getoneTodo);
+todoRouter.post("/:id/createtodo", createTodo);
+todoRouter.patch("/:id/updatetodo", updateTodo);
+todoRouter.delete("/:id/deletetodo", deleteTodo);
 export default todoRouter;

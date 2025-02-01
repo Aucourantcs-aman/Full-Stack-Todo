@@ -10,10 +10,6 @@ const todoSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    status: {
-      type: String,
-      required: true,
-    },
     user_id: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "userModel",
@@ -22,3 +18,5 @@ const todoSchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
+const todoModel = mongoose.model("todoModel", todoSchema);
+export default todoModel;
