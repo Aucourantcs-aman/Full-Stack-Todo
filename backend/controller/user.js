@@ -37,28 +37,39 @@ const userSignIn = async (req, res) => {
 };
 
 const userSignUp = async (req, res) => {
-  const { email, password } = req.body;
   try {
+    const { email, password } = req.body;
+
+    // Check if user exists
     const user = await userModel.findOne({ email });
+
     if (!user) {
-      res.json({
-        message: "User with this email does not exist",
-      });
+      return res.status(404).json({ message: "User not found" });
     }
-    const checkPassword = await bcrypt.compare(password, user.password);
-    if (!checkPassword) {
-      res.json({
-        message: "Password does not match",
-      });
-    } else {
-      res.json({
-        message: "User Signed Up Successfully",
-        data: user,
-      });
+
+    // Verify password
+    const isPasswordValid = await bcrypt.compare(password, user.password);
+    if (!isPasswordValid) {
+      return res.status(401).json({ message: "Invalid password" });
     }
+
+    // Generate JWT Token
+    const token = jwt.sign({ userId: user._id }, "secretKey", {
+      expiresIn: "7d",
+    });
+
+    // Send token in HTTP-only cookie
+    res
+      .cookie("token", token, { httpOnly: true })
+      .status(200)
+      .json({
+        message: "User logged in successfully",
+        data:user,
+        token,
+      });
   } catch (error) {
-    res.json({
-      message: "Error while signing up the User",
+    res.status(500).json({
+      message: "Error while logging in the user",
       error: error.message,
     });
   }

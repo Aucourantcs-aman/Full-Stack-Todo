@@ -1,29 +1,43 @@
 import todoModel from "../model/todoModel.js";
 import userModel from "../model/userModel.js";
 const createTodo = async (req, res) => {
-  const todoData = req.body;
   try {
-    const newTodo = await new todoModel(todoData).save();
+    const todoData = req.body;
+
+    // Ensure `req.id` is set from isAuthenticated middleware
+    if (!req.id) {
+      return res.status(400).json({ message: "User ID missing from request" });
+    }
+
+    const newTodo = await new todoModel({
+      ...todoData,
+      user_id: req.id,
+    }).save();
+
     if (newTodo) {
-      await userModel.findByIdAndUpdate(
-        todoData.user_id,
-        {
-          $push: { todo_ids: newTodo._id },
-        },
+      const updatedUser = await userModel.findByIdAndUpdate(
+        req.id,
+        { $push: { todo_ids: newTodo._id } },
         { new: true }
       );
-      res.json({
+
+      if (!updatedUser) {
+        return res.status(404).json({ message: "User not found" });
+      }
+
+      res.status(201).json({
         message: "Todo Created Successfully",
         data: newTodo,
       });
     }
   } catch (error) {
-    res.json({
+    res.status(500).json({
       message: "Error while creating todo",
       error: error.message,
     });
   }
 };
+
 const updateTodo = async (req, res) => {
   const newtodoData = req.body;
   try {

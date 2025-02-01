@@ -9,12 +9,13 @@ import {
   deleteTodo,
   getoneTodo,
 } from "../controller/todo.js";
+import isAuthenticated from "../middleware/auth.js";
 
 const todoRouter = Router();
 
-todoRouter.get("/gettodo", getTodo);
-todoRouter.get("/:id/getonetodo", getoneTodo);
-todoRouter.post("/:id/createtodo", createTodo);
-todoRouter.patch("/:id/updatetodo", updateTodo);
-todoRouter.delete("/:id/deletetodo", deleteTodo);
+todoRouter.get("/gettodo", isAuthenticated, getTodo);
+todoRouter.post("/createtodo", isAuthenticated, createTodo);
+todoRouter.get("/:id/getonetodo", isAuthenticated, getoneTodo);
+todoRouter.put("/:id/updatetodo", isAuthenticated, updateTodo);
+todoRouter.delete("/:id/deletetodo", isAuthenticated, deleteTodo);
 export default todoRouter;
