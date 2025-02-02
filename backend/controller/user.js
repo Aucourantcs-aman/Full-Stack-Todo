@@ -59,14 +59,11 @@ const userSignUp = async (req, res) => {
     });
 
     // Send token in HTTP-only cookie
-    res
-      .cookie("token", token, { httpOnly: true })
-      .status(200)
-      .json({
-        message: "User logged in successfully",
-        data:user,
-        token,
-      });
+    res.cookie("token", token, { httpOnly: true }).status(200).json({
+      message: "User logged in successfully",
+      data: user,
+      token,
+    });
   } catch (error) {
     res.status(500).json({
       message: "Error while logging in the user",
@@ -74,20 +71,37 @@ const userSignUp = async (req, res) => {
     });
   }
 };
-const getallUser = async(req,res)=>{
+const getallUser = async (req, res) => {
   try {
     const allUser = await userModel.find();
-    if(allUser){
+    if (allUser) {
       res.json({
-        message:"All User Fetched Successfully",
-        data:allUser
-      })
+        message: "All User Fetched Successfully",
+        data: allUser,
+      });
     }
   } catch (error) {
     res.json({
       message: "Error while getting all todo",
       error: error.message,
-    })
+    });
   }
-}
-export { userSignIn, userSignUp, getallUser };
+};
+const logoutUser = async (req,res) => {
+  try {
+    const userId = req.id;
+    const logoutUser = await userModel.findByIdAndDelete(userId);
+    if (logoutUser) {
+      req.headers = undefined;
+      res.json({
+        message: "User logged out successfully",
+      });
+    }
+  } catch (error) {
+    res.json({
+      message: "Error while getting all todo",
+      error: error.message,
+    });
+  }
+};
+export { userSignIn, userSignUp, getallUser, logoutUser };
