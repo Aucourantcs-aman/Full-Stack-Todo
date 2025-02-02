@@ -35,7 +35,6 @@ const userSignIn = async (req, res) => {
     });
   }
 };
-
 const userSignUp = async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -87,10 +86,10 @@ const getallUser = async (req, res) => {
     });
   }
 };
-const logoutUser = async (req,res) => {
+const logoutUser = async (req, res) => {
   try {
     const userId = req.id;
-    const logoutUser = await userModel.findByIdAndDelete(userId);
+    const logoutUser = await userModel.findByIdAndUpdate(userId);
     if (logoutUser) {
       req.headers = undefined;
       res.json({
