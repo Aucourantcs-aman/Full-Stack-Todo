@@ -115,20 +115,20 @@ const getoneTodo = async (req, res) => {
     });
   }
 };
-const getAllTodo = async(req,res)=>{
+const getAllTodo = async (req, res) => {
   try {
-    const alltodo = await todoModel.find()
-    if(alltodo){
+    const alltodo = await todoModel.find();
+    if (alltodo) {
       res.json({
-        message:"All Todo Fetched Successfully",
-        data:alltodo
-      })
+        message: "All Todo Fetched Successfully",
+        data: alltodo,
+      });
     }
   } catch (error) {
     res.json({
       message: "Error while getting all todo",
       error: error.message,
-    })
+    });
   }
-}
-export { createTodo, updateTodo, deleteTodo, getTodo, getoneTodo,getAllTodo };
+};
+export { createTodo, updateTodo, deleteTodo, getTodo, getoneTodo, getAllTodo };
