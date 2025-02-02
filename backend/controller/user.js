@@ -74,4 +74,20 @@ const userSignUp = async (req, res) => {
     });
   }
 };
-export { userSignIn, userSignUp };
+const getallUser = async(req,res)=>{
+  try {
+    const allUser = await userModel.find();
+    if(allUser){
+      res.json({
+        message:"All User Fetched Successfully",
+        data:allUser
+      })
+    }
+  } catch (error) {
+    res.json({
+      message: "Error while getting all todo",
+      error: error.message,
+    })
+  }
+}
+export { userSignIn, userSignUp, getallUser };

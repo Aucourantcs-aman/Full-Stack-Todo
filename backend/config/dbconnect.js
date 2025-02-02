@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const connectDB = async () => {
   const dbConnectionString =
-    "mongodb+srv://amanaucourantcs:aman@cluster0.ya1jx.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
+    "mongodb+srv://amaan07devloper:aman@cluster0.hav4m.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
   try {
     const db = await mongoose.connect(dbConnectionString);
     if (db) {

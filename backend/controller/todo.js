@@ -115,4 +115,20 @@ const getoneTodo = async (req, res) => {
     });
   }
 };
-export { createTodo, updateTodo, deleteTodo, getTodo, getoneTodo };
+const getAllTodo = async(req,res)=>{
+  try {
+    const alltodo = await todoModel.find()
+    if(alltodo){
+      res.json({
+        message:"All Todo Fetched Successfully",
+        data:alltodo
+      })
+    }
+  } catch (error) {
+    res.json({
+      message: "Error while getting all todo",
+      error: error.message,
+    })
+  }
+}
+export { createTodo, updateTodo, deleteTodo, getTodo, getoneTodo,getAllTodo };
