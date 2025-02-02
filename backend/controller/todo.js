@@ -41,14 +41,7 @@ const createTodo = async (req, res) => {
 const updateTodo = async (req, res) => {
   const newtodoData = req.body;
   try {
-    const newTodo = await todoModel.findByIdAndUpdate(
-      newtodoData._id,
-      {
-        title: newtodoData.title,
-        description: newtodoData.description,
-      },
-      { new: true }
-    );
+    const newTodo = await todoModel.findByIdAndUpdate(req.params.id, newtodoData, { new: true });
     res.json({
       message: "Todo Updated Successfully",
       data: newTodo,
@@ -65,7 +58,7 @@ const deleteTodo = async (req, res) => {
     const todotobedeleted = await todoModel.findByIdAndDelete(req.params.id);
     if (todotobedeleted) {
       await userModel.findByIdAndUpdate(
-        todotobedeleted.user_id,
+        req.id,
         { $pull: { todo_ids: todotobedeleted._id } },
         { new: true }
       );
