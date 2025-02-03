@@ -6,14 +6,15 @@ import SignIn from "./main/SignIn";
 import Todo from "./main/Todo";
 
 function App() {
+  const authenticated = true;
   return (
     <>
       <Router>
         <Header />
         <Routes>
-          <Route path="/signup" element={<SignUp />} />
+          <Route path="/" element={authenticated ? <Todo /> : <SignIn />} />
           <Route path="/signin" element={<SignIn />} />
-          <Route path="/" element={<Todo />} />
+          <Route path="/signup" element={<SignUp />} />
         </Routes>
       </Router>
     </>
