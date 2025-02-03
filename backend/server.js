@@ -6,13 +6,13 @@ import cookieParser from "cookie-parser";
 import cors from "cors";
 
 const web = express();
+web.use(cookieParser())
 const PORT = 3000;
 
 connectDB();
 web.use(express.json());
 web.use("/api/user", userRouter);
 web.use("/api/todo", todoRouter);
-web.use(cookieParser());
 web.use(
   cors({
     origin: "http://localhost:3000", // Change this to your frontend URL
