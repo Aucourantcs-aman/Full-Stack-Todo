@@ -5,8 +5,7 @@ import Todo from "./main/Todo";
 import Form from "./main/Form";
 
 function App() {
-  const authenticated = true;
-  const [user, setuser] = useState({});
+  const [user, setuser] = useState(true);
   const [loading, setloading] = useState(false);
   const [error, seterror] = useState(false);
   const [inputValue, setinputValue] = useState("");
@@ -16,7 +15,7 @@ function App() {
       <Router>
         <Header />
         <Routes>
-          <Route path="/" element={authenticated ? <Todo /> : <Form />} />
+          <Route path="/" element={user ? <Todo /> : <Form />} />
           <Route path="/form" element={<Form />} />
         </Routes>
       </Router>
