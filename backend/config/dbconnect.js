@@ -3,7 +3,6 @@ import mongoose from "mongoose";
 const connectDB = async () => {
 
   // aman Branch string
-
   // const dbConnectionString =
   //   "mongodb+srv://amaan07devloper:aman@cluster0.hav4m.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
 

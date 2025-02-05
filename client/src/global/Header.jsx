@@ -17,13 +17,7 @@ const Header = () => {
             className={active === "signiup" ? "text-blue-300 " : ""}
             onClick={() => setactive(active === "signiup" ? "" : "signiup")}
           >
-            <Link to={"/signup"}>Login </Link>
-          </li>
-          <li
-            className={active === "signin" ? "text-blue-300 " : ""}
-            onClick={() => setactive(active === "signin" ? "" : "signin")}
-          >
-            <Link to={"/signin"}>Register</Link>
+            <Link to={"/form"}>Form </Link>
           </li>
         </ul>
       </div>
