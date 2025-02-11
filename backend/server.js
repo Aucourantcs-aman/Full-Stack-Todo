@@ -16,7 +16,7 @@ web.use(
     origin: "http://localhost:5173", // Change this to your frontend URL
     credentials: true, // Allow sending cookies
     httpOnly: true,
-    methods: "GET,POST,PUT,DELETE",
+    methods: "GET,POST,PUT,DELETE,PATCH",
   })
 );
 web.use("/api/user", userRouter);
