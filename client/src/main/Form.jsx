@@ -1,7 +1,8 @@
 import React, { useState, useCallback } from "react";
+import axios from "axios";
 
 const Form = () => {
-  const [login, setlogin] = useState(true);
+  const [login, setlogin] = useState(false);
   const [user, setUser] = useState({
     name: "",
     email: "",
@@ -15,13 +16,28 @@ const Form = () => {
     setUser((user) => ({ ...user, [name]: value }));
   };
   const handleUser = useCallback(
-    (e) => {
+    async (e) => {
       e.preventDefault();
-      console.log(user); // Here you can send the data to an API or store it
-      setUser({ name: "", email: "", password: "" });
+      try {
+        const api = login
+          ? "http://localhost:3000/api/user/signin"
+          : "http://localhost:3000/api/user/signup";
+
+        console.log(api);
+
+        const res = await axios.post(api, user);
+        const data = res.data;
+        console.log(data);
+
+        // Reset user state
+        setUser({ name: "", email: "", password: "" });
+      } catch (error) {
+        console.error("Error:", error.response?.data || error.message);
+      }
     },
-    [user]
+    [user, setUser, login]
   );
+
   return (
     <>
       <div className="p-8 rounded-lg shadow-xl w-full max-w-sm mx-auto my-auto">
@@ -30,58 +46,103 @@ const Form = () => {
         </h2>
 
         <form action="submit">
-          <div className="mb-4">
-            <label
-              htmlFor="name"
-              className="block text-sm font-semibold text-black mb-2"
-            >
-              Name
-            </label>
-            <input
-              type="name"
-              value={user.name}
-              id="name"
-              name="name"
-              required
-              className="w-full p-3 rounded-md bg-blue-700 text-white border-2 border-transparent focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
-              onChange={handleChange}
-            />
-          </div>
-          <div className="mb-4">
-            <label
-              htmlFor="email"
-              className="block text-sm font-semibold text-black mb-2"
-            >
-              Email
-            </label>
-            <input
-              type="email"
-              value={user.email}
-              id="email"
-              name="email"
-              required
-              className="w-full p-3 rounded-md bg-blue-700 text-white border-2 border-transparent focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
-              onChange={handleChange}
-            />
-          </div>
+          {login ? (
+            <>
+              <div className="mb-4">
+                <label
+                  htmlFor="name"
+                  className="block text-sm font-semibold text-black mb-2"
+                >
+                  Name
+                </label>
+                <input
+                  type="name"
+                  value={user.name}
+                  id="name"
+                  name="name"
+                  required
+                  className="w-full p-3 rounded-md bg-blue-700 text-white border-2 border-transparent focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                  onChange={handleChange}
+                />
+              </div>
+              <div className="mb-4">
+                <label
+                  htmlFor="email"
+                  className="block text-sm font-semibold text-black mb-2"
+                >
+                  Email
+                </label>
+                <input
+                  type="email"
+                  value={user.email}
+                  id="email"
+                  name="email"
+                  autoComplete="email"
+                  required
+                  className="w-full p-3 rounded-md bg-blue-700 text-white border-2 border-transparent focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                  onChange={handleChange}
+                />
+              </div>
+              <div className="mb-6">
+                <label
+                  htmlFor="password"
+                  className="block text-sm font-semibold text-black mb-2"
+                >
+                  Password
+                </label>
+                <input
+                  type="password"
+                  id="password"
+                  autoComplete="current-password"
+                  name="password"
+                  value={user.password}
+                  required
+                  className="w-full p-3 rounded-md bg-blue-700 text-white border-2 border-transparent focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                  onChange={handleChange}
+                />
+              </div>
+            </>
+          ) : (
+            <>
+              <div className="mb-4">
+                <label
+                  htmlFor="email"
+                  className="block text-sm font-semibold text-black mb-2"
+                >
+                  Email
+                </label>
+                <input
+                  type="email"
+                  value={user.email}
+                  id="email"
+                  name="email"
+                   autoComplete="email"
+                  required
+                  className="w-full p-3 rounded-md bg-blue-700 text-white border-2 border-transparent focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                  onChange={handleChange}
+                />
+              </div>
 
-          <div className="mb-6">
-            <label
-              htmlFor="password"
-              className="block text-sm font-semibold text-black mb-2"
-            >
-              Password
-            </label>
-            <input
-              type="password"
-              id="password"
-              name="password"
-              value={user.password}
-              required
-              className="w-full p-3 rounded-md bg-blue-700 text-white border-2 border-transparent focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
-              onChange={handleChange}
-            />
-          </div>
+              <div className="mb-6">
+                <label
+                  htmlFor="password"
+                  className="block text-sm font-semibold text-black mb-2"
+                >
+                  Password
+                </label>
+                <input
+                  type="password"
+                  id="password"
+                  name="password"
+                  autoComplete="current-password"
+                  value={user.password}
+                  required
+                  className="w-full p-3 rounded-md bg-blue-700 text-white border-2 border-transparent focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                  onChange={handleChange}
+                />
+              </div>
+            </>
+          )}
 
           <div className="flex items-center justify-center w-full">
             <button

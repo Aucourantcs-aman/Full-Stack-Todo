@@ -8,7 +8,7 @@ const isAuthenticated = async (req, res, next) => {
     if (!token) {
       return res
         .status(401)
-        .json({ message: "Unauthorized - No token provided" });
+        .json({ message: "Unauthorized - No token provided or Not able to get the token" });
     }
     const decoded = jwt.verify(token, "secretKey");
     if (!decoded) {
