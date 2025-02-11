@@ -1,7 +1,7 @@
 import React from "react";
 import Delete from "./Delete";
 
-const List = () => {
+const List = ({ todo, settodo }) => {
   return (
     <div className="w-full max-w-lg bg-white shadow-md rounded-lg p-4">
       <ul className="space-y-3">
