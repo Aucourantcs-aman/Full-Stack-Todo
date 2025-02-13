@@ -2,12 +2,14 @@ import React from "react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import Cookies from "js-cookie";
+import { useNavigate } from "react-router-dom";
 const Header = () => {
   const [active, setactive] = useState("");
+  const navigate = useNavigate();
   const Out = () => {
     Cookies.remove("token");
+    navigate("/")
     window.location.reload();
-    console.log("Token Removed");
   };
   return (
     <>
