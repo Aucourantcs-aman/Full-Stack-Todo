@@ -33,8 +33,6 @@ const Add = ({ inputValue, setinputValue, todo, settodo }) => {
       
 
       if (res.data) {
-        console.log(res.data);
-        
         // If the API response is successful, add the new todo to the state
         const newArray = [...todo, { _id: id, description: todotext }];
         settodo(newArray);

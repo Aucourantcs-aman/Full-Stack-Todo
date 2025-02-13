@@ -11,8 +11,7 @@ const Todo = () => {
   return (
     <>
       <h1 className="text-4xl font-semibold text-center p-6 text-gray-800">
-        Todo of user : {userId}
-        todo
+        Todo Items
       </h1>
 
       <div className="flex flex-col items-center gap-4">
