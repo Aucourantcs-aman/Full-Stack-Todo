@@ -57,8 +57,6 @@ const Form = () => {
       </h2>
 
       <form onSubmit={handleUser}>
-        {" "}
-        {/* Change form's onSubmit handler */}
         {login ? (
           <>
             <div className="mb-4">

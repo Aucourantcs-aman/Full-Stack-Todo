@@ -5,11 +5,10 @@ const Add = ({ inputValue, setinputValue, todo, settodo }) => {
   const AddTodo = () => {
     const todotext = inputValue;
     const id = generateUniqueId();
-    const newArray = [...todo, { _id: id, todo: todotext }];
+    const newArray = [...todo, { _id: id, description: todotext }];
     settodo(newArray);
+    // console.log("Todo Added : ", newArray);
     setinputValue("");
-    console.log(todo);
-    
   };
   return (
     <button

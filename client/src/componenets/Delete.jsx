@@ -1,12 +1,17 @@
 import React from "react";
 
-const Delete = () => {
+const Delete = ({ id, todo, settodo }) => {
+  const deleteTodo = (id) => {
+    settodo(todo.filter((item) => item._id !== id));
+  };
+
   return (
-    <div>
-      <button className="bg-red-500 text-white px-3 py-1 rounded-md hover:bg-red-600 transition">
-        Delete
-      </button>
-    </div>
+    <button
+      onClick={() => deleteTodo(id)}
+      className="bg-red-500 text-white px-3 py-1 rounded-md hover:bg-red-600 transition"
+    >
+      Delete
+    </button>
   );
 };
 
