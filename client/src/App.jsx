@@ -11,8 +11,6 @@ function App() {
 
   useEffect(() => {
     const token = Cookies.get("token");
-    console.log(token);
-    
     if (token) {
       setUser(true); // User is logged in
     } else {
