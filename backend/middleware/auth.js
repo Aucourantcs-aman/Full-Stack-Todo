@@ -5,7 +5,6 @@ const isAuthenticated = async (req, res, next) => {
   try {
     // const { token } = req.headers;
     const token = req.cookies.token;
-    console.log("Token in middleware : ", token);
 
     if (!token) {
       return res

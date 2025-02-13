@@ -17,7 +17,6 @@ const Add = ({ inputValue, setinputValue, todo, settodo }) => {
 
       // Retrieve the token from cookies
       const token = Cookie.get("token");
-      console.log("Todo token:", token);
 
       if (!token) {
         alert("You must be logged in to add a todo.");
@@ -34,6 +33,8 @@ const Add = ({ inputValue, setinputValue, todo, settodo }) => {
       
 
       if (res.data) {
+        console.log(res.data);
+        
         // If the API response is successful, add the new todo to the state
         const newArray = [...todo, { _id: id, description: todotext }];
         settodo(newArray);

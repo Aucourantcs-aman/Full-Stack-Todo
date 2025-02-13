@@ -26,6 +26,11 @@ const Header = () => {
             <Link to={"/form"}>Form </Link>
           </li>
           <button onClick={Out}>Logout</button>
+          <button>
+            <Link to={"/"}>
+              <img src="./user.svg" alt="" />
+            </Link>
+          </button>
         </ul>
       </div>
     </>

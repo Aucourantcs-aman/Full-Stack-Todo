@@ -3,6 +3,7 @@ import React from "react";
 const Delete = ({ id, todo, settodo }) => {
   const deleteTodo = (id) => {
     settodo(todo.filter((item) => item._id !== id));
+    const api = "http://localhost:3000/api/todo/:id/deletetodo"
   };
 
   return (

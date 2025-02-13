@@ -6,7 +6,7 @@ import Form from "./main/Form";
 import Cookies from "js-cookie";
 
 function App() {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState("");
   const [inputValue, setInputValue] = useState("");
 
   useEffect(() => {
@@ -23,7 +23,7 @@ function App() {
       <Header />
       <Routes>
         <Route path="/" element={user ? <Todo /> : <Form />} />
-        <Route path="/form" element={<Form />} />
+        <Route path="/user/:userId" element={<Todo />} />
       </Routes>
     </Router>
   );
