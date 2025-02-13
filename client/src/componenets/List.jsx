@@ -16,7 +16,7 @@ const List = ({ todo, settodo }) => {
           withCredentials: true,
         });
         const data = res.data.data.todo_ids;
-        settodo(data); // ✅ Make sure to update state
+        settodo(data);
       } catch (error) {
         console.error("Error fetching todos:", error);
       }
@@ -25,7 +25,7 @@ const List = ({ todo, settodo }) => {
     if (userId) {
       fetchTodos();
     }
-  }, [userId]); // ✅ Corrected dependency
+  }, [userId]);
 
   return (
     <div className="w-full max-w-lg bg-white shadow-md rounded-lg p-4">
