@@ -28,14 +28,14 @@ const Form = () => {
           : "http://localhost:3000/api/user/signup";
         const res = await axios.post(api, user);
         const data = res.data;
-        // console.log("Response Data:", data);
 
         // Store token in cookies (expires in 7 days)
         Cookies.set("token", data.token, {
           expires: 7,
-          secure: true,
+          secure: false,
           sameSite: "Strict",
         });
+        
 
         // Reset user state
         setUser({ name: "", email: "", password: "" });

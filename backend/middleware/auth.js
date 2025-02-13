@@ -5,12 +5,15 @@ const isAuthenticated = async (req, res, next) => {
   try {
     // const { token } = req.headers;
     const token = req.cookies.token;
-    console.log(token);
-    
+    console.log("Token in middleware : ", token);
+
     if (!token) {
       return res
         .status(401)
-        .json({ message: "Unauthorized - No token provided or Not able to get the token" });
+        .json({
+          message:
+            "Unauthorized - No token provided or Not able to get the token",
+        });
     }
     const decoded = jwt.verify(token, "secretKey");
     if (!decoded) {
