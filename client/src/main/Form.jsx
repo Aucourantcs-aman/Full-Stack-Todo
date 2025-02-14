@@ -28,21 +28,22 @@ const Form = () => {
           : "http://localhost:3000/api/user/signup";
         const res = await axios.post(api, user);
         const data = res.data;
-        // console.log("Response Data:", data);
+        const user_name = data.data.name;
+        const dynamicPath = data.data._id;
 
         // Store token in cookies (expires in 7 days)
         Cookies.set("token", data.token, {
           expires: 7,
-          secure: true,
+          secure: false,
           sameSite: "Strict",
         });
 
         // Reset user state
         setUser({ name: "", email: "", password: "" });
-        window.location.reload();
+        // window.location.reload();
 
-        // Navigate to homepage after success
-        navigate("/");
+        // Navigate to Profile Page after success
+        navigate(`/user/${dynamicPath}`);
       } catch (error) {
         console.error("Error:", error.response?.data || error.message);
       }
@@ -57,8 +58,6 @@ const Form = () => {
       </h2>
 
       <form onSubmit={handleUser}>
-        {" "}
-        {/* Change form's onSubmit handler */}
         {login ? (
           <>
             <div className="mb-4">

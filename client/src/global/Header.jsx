@@ -1,13 +1,18 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Cookies from "js-cookie";
+import { useNavigate} from "react-router-dom";
 const Header = () => {
   const [active, setactive] = useState("");
+  // const { userId } = useParams();
+  // console.log(userId);
+  
+  const navigate = useNavigate();
   const Out = () => {
     Cookies.remove("token");
+    navigate("/");
     window.location.reload();
-    console.log("Token Removed");
   };
   return (
     <>
@@ -18,12 +23,6 @@ const Header = () => {
             onClick={() => setactive(active === "home" ? "" : "home")}
           >
             <Link to="/">Home</Link>
-          </li>
-          <li
-            className={active === "signiup" ? "text-blue-300 " : ""}
-            onClick={() => setactive(active === "signiup" ? "" : "signiup")}
-          >
-            <Link to={"/form"}>Form </Link>
           </li>
           <button onClick={Out}>Logout</button>
         </ul>

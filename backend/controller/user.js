@@ -3,34 +3,35 @@ import jwt from "jsonwebtoken";
 import userModel from "../model/userModel.js";
 
 const userSignIn = async (req, res) => {
-  const userData = req.body;
   try {
-    const useralreadyexists = await userModel.findOne({
+    const userData = req.body;
+    const userwithIDalreadyexists = await userModel.findOne({
       email: userData.email,
     });
-    if (!useralreadyexists) {
-      const salt = await bcrypt.genSalt(10);
-      const hashedPassword = await bcrypt.hash(userData.password, salt);
-      const newUserData = {
-        name: userData.name,
-        email: userData.email,
-        password: hashedPassword,
-      };
-      const NewUser = await new userModel(newUserData).save();
-      if (NewUser) {
-        res.json({
-          message: "User Signed IN Successfully",
-          data: NewUser,
-        });
-      }
+    if (userwithIDalreadyexists) {
+      return res
+        .status(400)
+        .json({ message: "User with this email already exists" });
     } else {
-      res.json({
-        message: "User with this email already exists",
+      const salt = await bcrypt.genSalt(10);
+      const hash = await bcrypt.hash(userData.password, salt);
+      userData.password = hash;
+      const user = await userModel.create(userData);
+      // Generate JWT Token
+      const token = jwt.sign({ userId: user._id }, "secretKey", {
+        expiresIn: "7d",
+      });
+
+      // Send token in HTTP-only cookie
+      res.cookie("token", token, { httpOnly: true }).status(200).json({
+        message: "User Created in successfully",
+        data: user,
+        token,
       });
     }
   } catch (error) {
-    res.json({
-      message: "Error while Creating User",
+    res.status(500).json({
+      message: "Error while Creating the user",
       error: error.message,
     });
   }

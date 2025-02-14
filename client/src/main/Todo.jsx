@@ -2,14 +2,16 @@ import React, { useState } from "react";
 import Input from "../componenets/Input";
 import Add from "../componenets/Add";
 import List from "../componenets/List";
+import { useParams } from 'react-router-dom';
 
 const Todo = () => {
+  const { userId } = useParams();
   const [inputValue, setinputValue] = useState("");
   const [todo, settodo] = useState([]);
   return (
     <>
       <h1 className="text-4xl font-semibold text-center p-6 text-gray-800">
-        Todo
+        Todo Items
       </h1>
 
       <div className="flex flex-col items-center gap-4">
