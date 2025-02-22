@@ -4,19 +4,21 @@ import Header from "./global/Header";
 import Todo from "./main/Todo";
 import Form from "./main/Form";
 import Cookies from "js-cookie";
+import { useDispatch, useSelector } from "react-redux";
+import { setUser } from "./redux/slices/authSlice";
 
 function App() {
-  const [user, setUser] = useState("");
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.auth.user);
+  // const [user, setUser] = useState("");
   const [inputValue, setInputValue] = useState("");
 
   useEffect(() => {
     const token = Cookies.get("token");
     if (token) {
-      setUser(true); // User is logged in
-    } else {
-      setUser(false); // No token, user is not logged in
+      dispatch(setUser({ user: true, token })); // User is logged in
     }
-  }, []); // Runs once when the component mounts
+  }, [dispatch]);
 
   return (
     <Router>
