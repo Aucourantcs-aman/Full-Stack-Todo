@@ -7,15 +7,17 @@ const connectDB = async () => {
   //   "mongodb+srv://amaan07devloper:aman@cluster0.hav4m.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
 
   // main branch string
-  const dbConnectionString =
-    "mongodb+srv://amanaucourantcs:aman@cluster0.ya1jx.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
-  try {
-    const db = await mongoose.connect(dbConnectionString);
-    if (db) {
-      console.log("connected to DB");
-    }
-  } catch (error) {
-    console.log("Error while connecting to DB" + error);
-  }
+  // const dbConnectionString =
+  //   "mongodb+srv://amanaucourantcs:aman@cluster0.ya1jx.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
+  // try {
+  //   const db = await mongoose.connect(dbConnectionString);
+  //   if (db) {
+  //     console.log("connected to DB");
+  //   }
+  // } catch (error) {
+  //   console.log("Error while connecting to DB" + error);
+  // }
+  console.log("Has to Connect to PostGress Db with Redis");
+  // return
 };
 export default connectDB;
