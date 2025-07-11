@@ -8,7 +8,9 @@ const connectDB = async () => {
 
   // main branch string
   const dbConnectionString =
-    "mongodb+srv://amanaucourantcs:aman@cluster0.ya1jx.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
+    "mongodb+srv://amaan07devloper:Practise@cluster0.smdys9e.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
+  // const dbConnectionString =
+  //   "mongodb+srv://amanaucourantcs:aman@cluster0.ya1jx.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
   try {
     const db = await mongoose.connect(dbConnectionString);
     if (db) {
