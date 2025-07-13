@@ -1,0 +1,28 @@
+{
+  "name": "paginatiion",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "server": "cd backend && nodemon server.js",
+    "client": "cd client && npm run dev"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Aucourantcs-aman/Full-Stack-Todo.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Aucourantcs-aman/Full-Stack-Todo/issues"
+  },
+  "homepage": "https://github.com/Aucourantcs-aman/Full-Stack-Todo#readme",
+  "description": "",
+  "devDependencies": {
+    "concurrently": "^9.2.0"
+  },
+  "dependencies": {
+    "nodemon": "^3.1.10"
+  }
+}

@@ -14,9 +14,12 @@ const Todo = () => {
 
   const fetchTodos = async () => {
     try {
-      const res = await axios.get(`http://localhost:3000/api/todo/todos?page=${page}&limit=5`, {
-        withCredentials: true,
-      });
+      const res = await axios.get(
+        `http://localhost:3000/api/todo/todos?page=${page}&limit=5`,
+        {
+          withCredentials: true,
+        }
+      );
       settodo(res.data.todos);
       setTotalPages(res.data.totalPages);
     } catch (error) {
@@ -38,7 +41,12 @@ const Todo = () => {
         {/* Input and Add button */}
         <div className="flex items-center gap-3 w-full max-w-lg">
           <Input inputValue={inputValue} setinputValue={setinputValue} />
-          <Add inputValue={inputValue} setinputValue={setinputValue} todo={todo} settodo={settodo} />
+          <Add
+            inputValue={inputValue}
+            setinputValue={setinputValue}
+            todo={todo}
+            settodo={settodo}
+          />
         </div>
 
         {/* Todo List */}
@@ -52,7 +60,9 @@ const Todo = () => {
             <button
               key={i + 1}
               onClick={() => setPage(i + 1)}
-              className={`px-3 py-1 rounded ${page === i + 1 ? "bg-blue-500 text-white" : "bg-gray-200"}`}
+              className={`px-3 py-1 rounded ${
+                page === i + 1 ? "bg-blue-500 text-white" : "bg-gray-200"
+              }`}
             >
               {i + 1}
             </button>

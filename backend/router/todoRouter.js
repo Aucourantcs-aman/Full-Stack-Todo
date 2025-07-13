@@ -20,6 +20,8 @@ todoRouter.put("/:id/updatetodo", isAuthenticated, updateTodo); // working
 todoRouter.delete("/:id/deletetodo", isAuthenticated, deleteTodo); // working
 todoRouter.get("/todos", async (req, res) => {
   try {
+    // console.log("REQ: ", req.query);
+
     const page = parseInt(req.query.page) || 1;
     const limit = parseInt(req.query.limit) || 5;
     const skip = (page - 1) * limit;
@@ -29,6 +31,8 @@ todoRouter.get("/todos", async (req, res) => {
       .skip(skip)
       .limit(limit)
       .sort({ createdAt: -1 });
+      // console.log("Tdods: ",todos);
+      
 
     const total = await todoModel.countDocuments();
 
@@ -38,7 +42,7 @@ todoRouter.get("/todos", async (req, res) => {
       todos,
     });
   } catch (err) {
-    res.status(500).json({ error: "Something went wrong" });
+    res.status(500).json({ error: "Something went wrong in Pagination" });
   }
 });
 
