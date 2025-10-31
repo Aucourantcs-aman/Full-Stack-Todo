@@ -33,7 +33,8 @@ const List = ({ todo, settodo }) => {
     }
   }, [userId]);
   const deleteTodo = async (TodoKiId) => {
-    const api = `http://localhost:3000/api/todo/${TodoKiId}/deletetodo`;
+    const api = `${import.meta.env.VITE_API_URL}/api/todo/${TodoKiId}/deletetodo`;
+    // const api = `http://localhost:3000/api/todo/${TodoKiId}/deletetodo`;
     const res = await axios.delete(api, {
       headers: { Authorization: `Bearer ${Cookies.get("token")}` },
       withCredentials: true,

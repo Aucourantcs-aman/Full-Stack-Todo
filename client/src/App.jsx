@@ -14,6 +14,7 @@ function App() {
   const [inputValue, setInputValue] = useState("");
 
   useEffect(() => {
+            // console.log(import.meta.env.VITE_API_URL);
     const token = Cookies.get("token");
     if (token) {
       dispatch(setUser({ user: true, token })); // User is logged in

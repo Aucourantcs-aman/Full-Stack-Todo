@@ -15,7 +15,8 @@ const Todo = () => {
   const fetchTodos = async () => {
     try {
       const res = await axios.get(
-        `http://localhost:3000/api/todo/todos?page=${page}&limit=5`,
+        `${import.meta.env.VITE_API_URL}/api/todo/todos?page=${page}&limit=5`,
+        // `http://localhost:3000/api/todo/todos?page=${page}&limit=5`,
         {
           withCredentials: true,
         }

@@ -13,7 +13,8 @@ const Add = ({ inputValue, setinputValue, todo, settodo }) => {
       }
 
       const id = generateUniqueId();
-      const api = "http://localhost:3000/api/todo/createtodo"; // URL can be modified dynamically if needed
+      // const api = `http://localhost:3000/api/todo/createtodo`; // URL can be modified dynamically if needed
+    const api = `${import.meta.env.VITE_API_URL}/api/todo/createtodo`; // URL can be modified dynamically if needed
 
       // Retrieve the token from cookies
       const token = Cookie.get("token");

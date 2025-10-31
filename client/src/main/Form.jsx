@@ -24,8 +24,10 @@ const Form = () => {
       e.preventDefault(); // Prevent default form submission
       try {
         const api = login
-          ? "http://localhost:3000/api/user/signin"
-          : "http://localhost:3000/api/user/signup";
+          ? `${import.meta.env.VITE_API_URL}/api/user/signin`
+          : `${import.meta.env.VITE_API_URL}/api/user/signup`;
+        //   "http://localhost:3000/api/user/signin"
+        // : "http://localhost:3000/api/user/signup";
         const res = await axios.post(api, user);
         const data = res.data;
         const user_name = data.data.name;
