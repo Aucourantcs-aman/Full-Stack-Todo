@@ -18,9 +18,12 @@ const userSignIn = async (req, res) => {
       userData.password = hash;
       const user = await userModel.create(userData);
       // Generate JWT Token
-      const token = jwt.sign({ userId: user._id }, "secretKey", {
+      const token = jwt.sign({ userId: user._id }, `${process.env.JWT_SECRET_KEY}`, {
         expiresIn: "7d",
       });
+      // const token = jwt.sign({ userId: user._id }, "secretKey", {
+      //   expiresIn: "7d",
+      // });
 
       // Send token in HTTP-only cookie
       res.cookie("token", token, { httpOnly: true }).status(200).json({
@@ -54,9 +57,12 @@ const userSignUp = async (req, res) => {
     }
 
     // Generate JWT Token
-    const token = jwt.sign({ userId: user._id }, "secretKey", {
+    const token = jwt.sign({ userId: user._id }, `${process.env.JWT_SECRET_KEY}`, {
       expiresIn: "7d",
     });
+    // const token = jwt.sign({ userId: user._id }, "secretKey", {
+    //   expiresIn: "7d",
+    // });
 
     // Send token in HTTP-only cookie
     res.cookie("token", token, { httpOnly: true }).status(200).json({

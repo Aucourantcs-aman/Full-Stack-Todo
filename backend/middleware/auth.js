@@ -14,7 +14,8 @@ const isAuthenticated = async (req, res, next) => {
             "Unauthorized - No token provided or Not able to get the token",
         });
     }
-    const decoded = jwt.verify(token, "secretKey");
+    const decoded = jwt.verify(token, `${process.env.JWT_SECRET_KEY}`);
+    // const decoded = jwt.verify(token, "secretKey");
     if (!decoded) {
       return res.status(401).json({ message: "Unauthorized - Invalid token" });
     }
