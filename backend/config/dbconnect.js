@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 
 const connectDB = async () => {
   // aman Branch string
@@ -16,10 +16,10 @@ const connectDB = async () => {
   try {
     const db = await mongoose.connect(dbConnectionString);
     if (db) {
-      console.log("connected to DB");
+      console.log('connected to DB');
     }
   } catch (error) {
-    console.log("Error while connecting to DB" + error);
+    console.log('Error while connecting to DB' + error);
   }
 };
 export default connectDB;

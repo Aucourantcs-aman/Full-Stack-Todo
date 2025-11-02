@@ -1,12 +1,12 @@
-import express from "express";
-import userRouter from "./router/userRouter.js";
-import connectDB from "./config/dbconnect.js";
-import todoRouter from "./router/todoRouter.js";
-import cookieParser from "cookie-parser";
-import cors from "cors";
-import { configDotenv } from "dotenv";
+import express from 'express';
+import userRouter from './router/userRouter.js';
+import connectDB from './config/dbconnect.js';
+import todoRouter from './router/todoRouter.js';
+import cookieParser from 'cookie-parser';
+import cors from 'cors';
+import { configDotenv } from 'dotenv';
 
-configDotenv()
+configDotenv();
 
 const web = express();
 web.use(cookieParser());
@@ -21,11 +21,11 @@ web.use(
     // origin: "http://localhost:5173", // Change this to your frontend URL
     credentials: true, // Allow sending cookies
     httpOnly: true,
-    methods: "GET,POST,PUT,DELETE,PATCH",
-  })
+    methods: 'GET,POST,PUT,DELETE,PATCH',
+  }),
 );
-web.use("/api/user", userRouter);
-web.use("/api/todo", todoRouter);
+web.use('/api/user', userRouter);
+web.use('/api/todo', todoRouter);
 // web.use(cors());
 
 web.listen(port, (err) => {

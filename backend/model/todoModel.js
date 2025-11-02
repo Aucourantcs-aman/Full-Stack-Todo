@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 
 const todoSchema = new mongoose.Schema(
   {
@@ -8,11 +8,11 @@ const todoSchema = new mongoose.Schema(
     },
     user_id: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "userModel",
+      ref: 'userModel',
       // required: true,
     },
   },
-  { timestamps: true }
+  { timestamps: true },
 );
-const todoModel = mongoose.model("todoModel", todoSchema);
+const todoModel = mongoose.model('todoModel', todoSchema);
 export default todoModel;

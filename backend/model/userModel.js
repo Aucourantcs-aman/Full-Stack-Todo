@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 
 const userSchema = new mongoose.Schema(
   {
@@ -17,12 +17,12 @@ const userSchema = new mongoose.Schema(
     },
     todo_ids: {
       type: [mongoose.Schema.Types.ObjectId],
-      ref: "todoModel",
+      ref: 'todoModel',
       default: [],
     },
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
-const userModel = mongoose.model("userModel", userSchema);
+const userModel = mongoose.model('userModel', userSchema);
 export default userModel;
