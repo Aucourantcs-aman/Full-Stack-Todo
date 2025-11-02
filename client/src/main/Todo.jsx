@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from "react";
+import  { useState, useEffect } from "react";
 import Input from "../componenets/Input";
 import Add from "../componenets/Add";
 import List from "../componenets/List";
-import { useParams } from "react-router-dom";
+// import { useParams } from "react-router-dom";
 import axios from "axios";
 
 const Todo = () => {
-  const { userId } = useParams();
+  // const { userId } = useParams();
   const [inputValue, setinputValue] = useState("");
   const [todo, settodo] = useState([]);
   const [page, setPage] = useState(1);

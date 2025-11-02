@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import Cookies from "js-cookie";
 
 const List = ({ todo, settodo }) => {
   const [edit, setedit] = useState(false);
-  const [newData, setNewData] = useState("");
+  // const [newData, setNewData] = useState("");
   const { userId } = useParams();
   useEffect(() => {
     const fetchTodos = async () => {
@@ -19,7 +19,7 @@ const List = ({ todo, settodo }) => {
         // console.log(res.data.data.todo_ids);
 
         // Storing the TodoKiId values in an array
-        const todoIds = data.map((item) => item._id);
+        // const todoIds = data.map((item) => item._id);
         // console.log("TodoKiIds:", todoIds); // This will log all the _id values
 
         settodo(data); // Update your state with the fetched data

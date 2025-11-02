@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import { useState, useCallback } from "react";
 import axios from "axios";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
@@ -30,7 +30,7 @@ const Form = () => {
         // : "http://localhost:3000/api/user/signup";
         const res = await axios.post(api, user);
         const data = res.data;
-        const user_name = data.data.name;
+        // const user_name = data.data.name;
         const dynamicPath = data.data._id;
 
         // Store token in cookies (expires in 7 days)
