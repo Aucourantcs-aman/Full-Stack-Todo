@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Header from "./global/Header";
 import Todo from "./main/Todo";
@@ -11,7 +11,7 @@ function App() {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.auth.user);
   // const [user, setUser] = useState("");
-  const [inputValue, setInputValue] = useState("");
+  // const [inputValue, setInputValue] = useState("");
 
   useEffect(() => {
             // console.log(import.meta.env.VITE_API_URL);

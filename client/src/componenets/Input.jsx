@@ -1,5 +1,5 @@
-import React from "react";
-
+// import React from "react";
+import PropTypes from 'prop-types';
 const Input = ({ inputValue, setinputValue }) => {
   return (
     <input
@@ -13,5 +13,8 @@ const Input = ({ inputValue, setinputValue }) => {
     />
   );
 };
-
+Input.propTypes = {
+  inputValue: PropTypes.string.isRequired,
+  setinputValue: PropTypes.func.isRequired,
+};
 export default Input;

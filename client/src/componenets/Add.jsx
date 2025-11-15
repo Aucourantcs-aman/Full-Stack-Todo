@@ -1,53 +1,54 @@
-import React from "react";
-import generateUniqueId from "generate-unique-id";
-import axios from "axios";
-import Cookie from "js-cookie";
+// import React from "react";
+import generateUniqueId from 'generate-unique-id';
+import axios from 'axios';
+import Cookie from 'js-cookie';
+import PropTypes from 'prop-types';
 
 const Add = ({ inputValue, setinputValue, todo, settodo }) => {
   const AddTodo = async () => {
     try {
       const todotext = inputValue.trim();
       if (!todotext) {
-        alert("Please enter a todo description.");
+        alert('Please enter a todo description.');
         return;
       }
 
       const id = generateUniqueId();
       // const api = `http://localhost:3000/api/todo/createtodo`; // URL can be modified dynamically if needed
-    const api = `${import.meta.env.VITE_API_URL}/api/todo/createtodo`; // URL can be modified dynamically if needed
+      const api = `${import.meta.env.VITE_API_URL}/api/todo/createtodo`; // URL can be modified dynamically if needed
 
       // Retrieve the token from cookies
-      const token = Cookie.get("token");
+      const token = Cookie.get('token');
 
       if (!token) {
-        alert("You must be logged in to add a todo.");
+        alert('You must be logged in to add a todo.');
         return;
       }
 
       // Make the API call
-      const res = await axios.post(api, { description: todotext }, {
-        headers: {
-          Authorization: `Bearer ${token}`,
+      const res = await axios.post(
+        api,
+        { description: todotext },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+          withCredentials: true, // Include cookies in the request
         },
-        withCredentials: true,  // Include cookies in the request
-      });
-      
+      );
 
       if (res.data) {
         // If the API response is successful, add the new todo to the state
         const newArray = [...todo, { _id: id, description: todotext }];
         settodo(newArray);
-        setinputValue(""); // Reset input field
+        setinputValue(''); // Reset input field
       } else {
-        console.error(
-          "Failed to add todo:",
-          res.data.message || "Unknown error"
-        );
-        alert("Failed to add todo. Please try again.");
+        console.error('Failed to add todo:', res.data.message || 'Unknown error');
+        alert('Failed to add todo. Please try again.');
       }
     } catch (error) {
-      console.error("Error adding todo:", error.message);
-      alert("An error occurred while adding your todo. Please try again.");
+      console.error('Error adding todo:', error.message);
+      alert('An error occurred while adding your todo. Please try again.');
     }
   };
 
@@ -60,5 +61,10 @@ const Add = ({ inputValue, setinputValue, todo, settodo }) => {
     </button>
   );
 };
-
+Add.propTypes = {
+  inputValue: PropTypes.string.isRequired,
+  setinputValue: PropTypes.func.isRequired,
+  todo: PropTypes.array.isRequired,
+  settodo: PropTypes.func.isRequired,
+};
 export default Add;

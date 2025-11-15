@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import Cookies from "js-cookie";
+import PropTypes from "prop-types";
 
 const List = ({ todo, settodo }) => {
   const [edit, setedit] = useState(false);
@@ -31,7 +32,7 @@ const List = ({ todo, settodo }) => {
     if (userId) {
       fetchTodos();
     }
-  }, [userId]);
+  }, [userId, settodo]);
   const deleteTodo = async (TodoKiId) => {
     const api = `${import.meta.env.VITE_API_URL}/api/todo/${TodoKiId}/deletetodo`;
     // const api = `http://localhost:3000/api/todo/${TodoKiId}/deletetodo`;
@@ -88,5 +89,8 @@ const List = ({ todo, settodo }) => {
     </div>
   );
 };
-
+List.propTypes = {
+  todo: PropTypes.array.isRequired,
+  settodo: PropTypes.func.isRequired,
+};
 export default List;

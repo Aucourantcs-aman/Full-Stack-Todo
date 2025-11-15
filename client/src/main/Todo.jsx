@@ -1,4 +1,4 @@
-import  { useState, useEffect } from "react";
+import  { useState, useEffect, useCallback  } from "react";
 import Input from "../componenets/Input";
 import Add from "../componenets/Add";
 import List from "../componenets/List";
@@ -12,25 +12,23 @@ const Todo = () => {
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
 
-  const fetchTodos = async () => {
-    try {
-      const res = await axios.get(
-        `${import.meta.env.VITE_API_URL}/api/todo/todos?page=${page}&limit=5`,
-        // `http://localhost:3000/api/todo/todos?page=${page}&limit=5`,
-        {
-          withCredentials: true,
-        }
-      );
-      settodo(res.data.todos);
-      setTotalPages(res.data.totalPages);
-    } catch (error) {
-      console.error("Error fetching todos:", error);
-    }
-  };
+const fetchTodos = useCallback(async () => {
+  try {
+    const res = await axios.get(
+      `${import.meta.env.VITE_API_URL}/api/todo/todos?page=${page}&limit=5`,
+      { withCredentials: true }
+    );
+    settodo(res.data.todos);
+    setTotalPages(res.data.totalPages);
+  } catch (error) {
+    console.error("Error fetching todos:", error);
+  }
+}, [page]); // page is a dependency
+
 
   useEffect(() => {
     fetchTodos();
-  }, [page]);
+  }, [fetchTodos]);
 
   return (
     <>
