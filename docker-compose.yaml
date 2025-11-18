@@ -25,6 +25,8 @@ services:
   # Frontend service (React)
   frontend:
     build: ./client # Path to your frontend's Dockerfile
+    args: 
+      VITE_API_URL: http://98.92.123.46:3000/api
       # dockerfile: Dockerfile
     container_name: frontend
     restart: always
