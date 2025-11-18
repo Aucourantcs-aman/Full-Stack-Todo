@@ -1,41 +1,35 @@
-# version: '3.8'
+version: '3.8'  # Docker Compose file format version
+
 services:
-  # MongoDB service
-  # mongo:
-  #   image: mongo:latest
-  #   container_name: mern_mongo
-  #   ports:
-  #     - '27017:27017'
-  #   volumes:
-  #     - mongo_data:/data/db
-
-  # Backend service (Node.js/Express)
+  # ---------------------------------------------
+  # Backend Service (Node.js + Express)
+  # ---------------------------------------------
   backend:
-    build: ./backend # Path to your backend's Dockerfile
-      # dockerfile: Dockerfile
-    container_name: backend
-    restart: always
+    build:
+      context: ./backend         # Folder where the backend Dockerfile is located
+      dockerfile: Dockerfile     # Specify the exact Dockerfile to use
+    container_name: backend      # Name of the container for easy identification
+    restart: always              # Automatically restart if the container stops
     ports:
-      - '3000:3000' # Map host port 5000 to container port 5000
+      - "3000:3000"              # Expose backend on host port 3000 → container port 3000
     env_file:
-      - ./backend/.env
-    # depends_on:
-    #   - mongo # Ensure MongoDB starts before the backend
+      - ./backend/.env           # Load environment variables from this file inside the container
 
-  # Frontend service (React)
+  # ---------------------------------------------
+  # Frontend Service (React + Vite)
+  # ---------------------------------------------
   frontend:
-    build: ./client # Path to your frontend's Dockerfile
-    args: 
-      VITE_API_URL: http://98.92.123.46:3000/api
-      # dockerfile: Dockerfile
-    container_name: frontend
-    restart: always
+    build:
+      context: ./client          # Folder where the frontend Dockerfile is located
+      dockerfile: Dockerfile     # The Dockerfile used to build the React app
+      args:
+        # Build-time argument used inside the Dockerfile, injected into Vite build
+        VITE_API_URL: "http://98.92.123.46:3000/api"  
+    container_name: frontend     # Name of the container for readability
+    restart: always              # Restart container automatically if it fails
     ports:
-      - '5173:5173' # Map host port 3000 to container port 3000
+      - "5173:5173"              # Expose frontend on host port 5173 → container port 5173
     env_file:
-      - ./client/.env
+      - ./client/.env            # Load environment variables for the frontend build/runtime
     depends_on:
-      - backend # Ensure backend starts before the frontend
-
-# volumes:
-#   mongo_data: # Define a named volume for persistent MongoDB data
+      - backend                  # Ensures backend container starts before frontend
