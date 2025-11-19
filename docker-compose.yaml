@@ -24,7 +24,9 @@ services:
       dockerfile: Dockerfile     # The Dockerfile used to build the React app
       args:
         # Build-time argument used inside the Dockerfile, injected into Vite build
-        VITE_API_URL: "http://98.92.123.46:3000/api"  
+        # VITE_API_URL: "http://localhost:3000"  
+        # VITE_API_URL: "http://98.92.123.46:3000"  
+        VITE_API_URL: "http://3.238.225.87:3000"  
     container_name: frontend     # Name of the container for readability
     restart: always              # Restart container automatically if it fails
     ports:

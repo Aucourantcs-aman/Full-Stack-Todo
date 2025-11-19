@@ -11,7 +11,7 @@ const List = ({ todo, settodo }) => {
   useEffect(() => {
     const fetchTodos = async () => {
       try {
-        const api = `http://localhost:3000/api/todo/${userId}/gettodo`;
+        const api = `${import.meta.env.VITE_API_URL}/api/todo/${userId}/gettodo`;
         const res = await axios.get(api, {
           headers: { Authorization: `Bearer ${Cookies.get("token")}` },
           withCredentials: true,
