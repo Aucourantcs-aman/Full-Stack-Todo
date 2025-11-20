@@ -17,18 +17,20 @@ connectDB();
 web.use(express.json());
 web.use(
   cors({
-    origin: `${process.env.REACT_APP_API_URL}`, // Change this to your frontend URL
+    // origin: `${process.env.REACT_APP_API_URL}`, // Change this to your frontend URL
+    origin: ['http://3.238.225.87:5173', 'http://3.238.225.87'],
     // origin: "http://localhost:5173", // Change this to your frontend URL
     credentials: true, // Allow sending cookies
     httpOnly: true,
     methods: 'GET,POST,PUT,DELETE,PATCH',
   }),
 );
+
 web.use('/api/user', userRouter);
 web.use('/api/todo', todoRouter);
-web.get('/',(req,res)=>{
-res.send("GET REQ Full stack Todo")
-})
+web.get('/', (req, res) => {
+  res.send('GET REQ Full stack Todo');
+});
 // web.use(cors());
 
 web.listen(port, (err) => {
