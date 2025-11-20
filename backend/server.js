@@ -26,6 +26,9 @@ web.use(
 );
 web.use('/api/user', userRouter);
 web.use('/api/todo', todoRouter);
+web.get('/',(req,res)=>{
+res.send("GET REQ Full stack Todo")
+})
 // web.use(cors());
 
 web.listen(port, (err) => {
