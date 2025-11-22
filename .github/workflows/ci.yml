@@ -71,6 +71,7 @@ jobs:
 
           # fetch latest code
           git fetch --all
+          git checkout todo_mdb
           git reset --hard origin/todo_mdb
 
           # rebuild containers
